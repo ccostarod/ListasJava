@@ -24,8 +24,13 @@ public class Program {
             double salary;
             System.out.println("Emplyoee #" + cont + ": ");
 
-            System.out.print("Id: ");
+            System.out.print("ID: ");
             id = sc.nextInt();
+            while (hasId(employers, id)){
+                System.out.println("This ID already exists, Try another ID!");
+                System.out.print("ID: ");
+                id = sc.nextInt();
+            }
             System.out.print("Name: ");
             name = sc.next();
             sc.nextLine();
@@ -35,6 +40,7 @@ public class Program {
 
             employers.add(emp);
             cont++;
+            System.out.println();
         }
 
 
@@ -60,6 +66,9 @@ public class Program {
 
     }
 
-
+    public static boolean hasId(List<Employer> list, int id) {
+        Employer emp = list.stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+        return emp != null;
+    }
 
 }
