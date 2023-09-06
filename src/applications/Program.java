@@ -40,15 +40,15 @@ public class Program {
 
         System.out.print("Enter the employee id that will have salary increase: ");
         int escolhaId = sc.nextInt();
+        Employer emp = employers.stream().filter(x -> x.getId() == escolhaId).findFirst().orElse(null);
 
-        Integer pos = position(employers, escolhaId);
-        if (pos == null){
+        if (emp == null){
             System.out.println("The id does not exist!");
         }
         else {
             System.out.print("Enter the percentage: ");
             double escolhaPercentage = sc.nextDouble();
-            employers.get(pos).increaseSalary(escolhaPercentage);
+            emp.increaseSalary(escolhaPercentage);
         }
 
         System.out.println();
@@ -60,14 +60,6 @@ public class Program {
 
     }
 
-    //Precisa ser static pq pra a main tambem eh.
-    public static Integer position(List<Employer> list, int id){
-        for (int i = 0; i < list.size(); i++){
-            if(list.get(i).getId() == id){
-                return i;
-            }
-        }
-        return null;
-    }
+
 
 }
